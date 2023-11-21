@@ -1,0 +1,169 @@
+@font-face {
+  font-family: "Funhouse";
+  src: url("./fonts/Funhouse.ttf") format("truetype");
+}
+body {
+  background-size: 150px 150px; /* Größe der Kästchen */
+  background-image: linear-gradient(
+      45deg,
+      #c6835a 25%,
+      transparent 25%,
+      transparent 75%,
+      #c6835a 75%,
+      #c6835a
+    ),
+    linear-gradient(
+      45deg,
+      #c6835a 25%,
+      #f7ce94 25%,
+      #f7ce94 75%,
+      #c6835a 75%,
+      #c6835a
+    ); /* Hintergrundmuster mit zwei Farben */
+  background-position: 0 0, 75px 75px; /* Startpositionen der Muster */
+  font-family: "Funhouse", sans-serif;
+  margin: 0;
+}
+.header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.header-logo-group > h1 {
+  margin: 0px;
+}
+.header-logo-group > img {
+  max-width: 300px;
+}
+.analogClock {
+  width: 150px;
+  height: 150px;
+}
+
+.bar-container {
+  width: 200px;
+  border: 1px solid black;
+  margin-bottom: 5px;
+}
+
+.bar {
+  height: 20px;
+}
+.bar-value {
+  display: flex;
+  justify-content: center;
+}
+
+.bar-white {
+  background-color: gray;
+}
+
+.bar-blue {
+  background-color: blue;
+}
+
+.bar-green {
+  background-color: green;
+}
+
+.bar-yellow {
+  background-color: yellow;
+}
+
+.bar-pink {
+  background-color: pink;
+}
+
+.checkbox-container {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.checkbox.checked {
+  background-color: #00ff00; /* Farbe für abgehakt */
+}
+
+.checkbox.empty {
+  background-color: #ffffff; /* Farbe für leer */
+}
+
+.people {
+  background: #b9a067;
+  padding: 10px;
+  max-width: 220px;
+
+  box-sizing: border-box;
+  text-align: left;
+  margin: 10px; /* Abstand zwischen den Elementen anpassen */
+}
+
+.people-list {
+  background: #d5cda7;
+  padding: 10px;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  max-width: 1380px;
+}
+
+.people-list li {
+  flex: 1 0 24%; /* Setze die Breite für jedes Element (24% für vier nebeneinander) */
+  margin: 5px;
+  text-align: start;
+}
+
+.clock-stats {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.stats {
+  background: #b9a067;
+  padding: 10px;
+  max-width: 220px;
+
+  box-sizing: border-box;
+  text-align: left;
+  margin: 10px; /* Abstand zwischen den Elementen anpassen */
+}
+
+.stats-list {
+  max-width: 230px;
+  background: #d5cda7;
+  padding: 10px;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-list li {
+  flex: 1 0 24%; /* Setze die Breite für jedes Element (24% für vier nebeneinander) */
+  margin: 5px;
+  text-align: start;
+}
+.money {
+  background-color: gold;
+  text-align: center;
+}
+
+.menu {
+  float: left;
+  width: 20%; /* Breite des Menüs anpassen */
+  padding: 20px;
+  box-sizing: border-box;
+}
+.content {
+  float: left;
+  width: 80%; /* Breite des Inhalts anpassen */
+  padding: 20px;
+  box-sizing: border-box;
+}
