@@ -11,7 +11,7 @@ function writeData() {
   var json = {
     time: {
       hour: "",
-      minute: "",
+      minutes: "",
     },
     stats: {
       stamina: "",
@@ -26,41 +26,41 @@ function writeData() {
       dog: "",
     },
     people: {
-      Maria: "",
-      Popuri: "",
-      Elli: "",
-      Ann: "",
-      Karen: "",
-      "Postbote Harris": "",
-      Grey: "",
-      Jeff: "",
-      Cliff: "",
-      Kai: "",
-      Mayor: "",
-      "Mayor Wife": "",
-      Lillia: "",
-      Basil: "",
-      Ellen: "",
-      Doug: "",
-      Gotz: "",
-      "Gotz Wife": "",
-      "Potion man": "",
-      Kent: "",
-      Stu: "",
-      Midwife: "",
-      May: "",
-      Rick: "",
-      Pastor: "",
-      Shipper: "",
-      Saibara: "",
-      Barmann: "",
-      Fischer: "",
-      "Zimmermann 1": "",
-      "Zimmermann 2": "",
-      Meister: "",
-      Waldvieh: "",
-      Oldman: "",
-      Oldwoman: "",
+      maria: "",
+      popuri: "",
+      elli: "",
+      ann: "",
+      karen: "",
+      harris: "",
+      grey: "",
+      jeff: "",
+      cliff: "",
+      kai: "",
+      mayor: "",
+      mayor_Wife: "",
+      lillia: "",
+      basil: "",
+      ellen: "",
+      doug: "",
+      gotz: "",
+      gotz_Wife: "",
+      potion_man: "",
+      kent: "",
+      stu: "",
+      midwife: "",
+      may: "",
+      rick: "",
+      pastor: "",
+      shipper: "",
+      saibara: "",
+      barmann: "",
+      fischer: "",
+      zimmermann1: "",
+      zimmermann2: "",
+      meister: "",
+      waldvieh: "",
+      oldman: "",
+      oldwoman: "",
     },
     giftConvo: {
       First: "",
@@ -77,7 +77,7 @@ function writeData() {
     },
   };
   json.time.hour = mem.u8[0x801fb5ca];
-  json.time.minute = mem.u8[0x8017027f];
+  json.time.minutes = mem.u8[0x8017027f];
   json.animals.horse = mem.u8[0x8016fdd0];
   json.animals.dog = mem.u8[0x801886b0];
   json.stats.stamina = mem.u8[0x80189060];
@@ -86,41 +86,41 @@ function writeData() {
   json.stats.money1 = mem.u16[0x801fd60d];
   json.stats.money2 = mem.u16[0x801fd60e];
   json.stats.money3 = mem.u16[0x801fd60f];
-  json.people.Maria = mem.u8[0x801c3f90];
-  json.people.Popuri = mem.u8[0x801c3f91];
-  json.people.Elli = mem.u8[0x801c3f92];
-  json.people.Ann = mem.u8[0x801c3f93];
-  json.people.Karen = mem.u8[0x801c3f94];
-  json.people["Postbote Harris"] = mem.u8[0x801c3f96];
-  json.people.Grey = mem.u8[0x801c3f97];
-  json.people.Jeff = mem.u8[0x801c3f98];
-  json.people.Cliff = mem.u8[0x801c3f99];
-  json.people.Kai = mem.u8[0x801c3f9a];
-  json.people.Mayor = mem.u8[0x801c3f9b];
-  json.people["Mayor Wife"] = mem.u8[0x801c3f9c];
-  json.people.Lillia = mem.u8[0x801c3f9d];
-  json.people.Basil = mem.u8[0x801c3f9e];
-  json.people.Ellen = mem.u8[0x801c3f9f];
-  json.people.Doug = mem.u8[0x801c3fa0];
-  json.people.Gotz = mem.u8[0x801c3fa1];
-  json.people["Gotz Wife"] = mem.u8[0x801c3fa2];
-  json.people["Potion man"] = mem.u8[0x801c3fa3];
-  json.people.Kent = mem.u8[0x801c3fa4];
-  json.people.Stu = mem.u8[0x801c3fa5];
-  json.people.Midwife = mem.u8[0x801c3fa6];
-  json.people.May = mem.u8[0x801c3fa7];
-  json.people.Rick = mem.u8[0x801c3fa8];
-  json.people.Pastor = mem.u8[0x801c3fa9];
-  json.people.Shipper = mem.u8[0x801c3faa];
-  json.people.Saibara = mem.u8[0x801c3fab];
-  json.people.Barmann = mem.u8[0x801c3fac];
-  json.people.Fischer = mem.u8[0x801c3fad];
-  json.people["Zimmermann 1"] = mem.u8[0x801c3fae];
-  json.people["Zimmermann 2"] = mem.u8[0x801c3faf];
-  json.people.Meister = mem.u8[0x801c3fb0];
-  json.people.Waldvieh = mem.u8[0x801c3fb1];
-  json.people.Oldman = mem.u8[0x801c3fb4];
-  json.people.Oldwoman = mem.u8[0x801c3fb5];
+  json.people.maria = mem.u8[0x801c3f90];
+  json.people.popuri = mem.u8[0x801c3f91];
+  json.people.elli = mem.u8[0x801c3f92];
+  json.people.ann = mem.u8[0x801c3f93];
+  json.people.karen = mem.u8[0x801c3f94];
+  json.people.harris = mem.u8[0x801c3f96];
+  json.people.grey = mem.u8[0x801c3f97];
+  json.people.jeff = mem.u8[0x801c3f98];
+  json.people.cliff = mem.u8[0x801c3f99];
+  json.people.kai = mem.u8[0x801c3f9a];
+  json.people.mayor = mem.u8[0x801c3f9b];
+  json.people.mayor_Wife = mem.u8[0x801c3f9c];
+  json.people.lillia = mem.u8[0x801c3f9d];
+  json.people.basil = mem.u8[0x801c3f9e];
+  json.people.ellen = mem.u8[0x801c3f9f];
+  json.people.doug = mem.u8[0x801c3fa0];
+  json.people.gotz = mem.u8[0x801c3fa1];
+  json.people.gotz_Wife = mem.u8[0x801c3fa2];
+  json.people.potion_man = mem.u8[0x801c3fa3];
+  json.people.kent = mem.u8[0x801c3fa4];
+  json.people.stu = mem.u8[0x801c3fa5];
+  json.people.midwife = mem.u8[0x801c3fa6];
+  json.people.may = mem.u8[0x801c3fa7];
+  json.people.rick = mem.u8[0x801c3fa8];
+  json.people.pastor = mem.u8[0x801c3fa9];
+  json.people.shipper = mem.u8[0x801c3faa];
+  json.people.saibara = mem.u8[0x801c3fab];
+  json.people.barmann = mem.u8[0x801c3fac];
+  json.people.fischer = mem.u8[0x801c3fad];
+  json.people.zimmermann1 = mem.u8[0x801c3fae];
+  json.people.zimmermann2 = mem.u8[0x801c3faf];
+  json.people.meister = mem.u8[0x801c3fb0];
+  json.people.waldvieh = mem.u8[0x801c3fb1];
+  json.people.oldman = mem.u8[0x801c3fb4];
+  json.people.oldwoman = mem.u8[0x801c3fb5];
   json.giftConvo.First = mem.u8[0x8016f8b3];
   json.giftConvo.Second = mem.u8[0x8016f8cc];
   json.giftConvo.Third = mem.u8[0x8016f8cd];
