@@ -3,17 +3,17 @@ from flask_socketio import SocketIO
 import time
 from threading import Thread
 
-app = Flask(__name__, static_url_path='', static_folder='')
+app = Flask(__name__, static_url_path='', static_folder='.')
 socketio = SocketIO(app)
 
 # Hier importieren Sie Ihre Python-Klasse, die die Daten bereitstellt
-from hm64mem import HM64Mem
+from python_server.hm64mem import HM64Mem
 
 data_provider = HM64Mem()  # Annahme: Ihre Datenklasse
 
 @app.route("/")
 def index():
-    return send_file("./index.html")
+    return send_file("index.html")
 
 def emit_updated_data():
     json_data = data_provider.get_data() 

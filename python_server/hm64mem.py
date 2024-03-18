@@ -1,4 +1,4 @@
-from ReadWriteClass import ReadWriteMemory
+from python_server.ReadWriteClass import ReadWriteMemory
 
 name_address_array = [
     ('hour', 0xE003B5C9,),
