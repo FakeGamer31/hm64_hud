@@ -1,0 +1,58 @@
+  hour		0x801fb5ca
+  minute		0x8017027f
+  horse		0x8016fdd0
+  dog		0x801886b0
+  stamina		0x80189060
+  fatigue		0x801890d1
+  alcohol		0x80189e52
+  money1	    0x801fd60d
+  money2	    0x801fd60e
+  money3	    0x801fd60f
+  Maria		0x801c3f90
+  Popuri		0x801c3f91
+  Elli		0x801c3f92
+  Ann		0x801c3f93
+  Karen		0x801c3f94
+  "Postbote Harris"		0x801c3f96
+  Grey		0x801c3f97
+  Jeff		0x801c3f98
+  Cliff		0x801c3f99
+  Kai		0x801c3f9a
+  Mayor		0x801c3f9b
+  "Mayor Wife"		0x801c3f9c
+  Lillia		0x801c3f9d
+  Basil		0x801c3f9e
+  Ellen		0x801c3f9f
+  Doug		0x801c3fa0
+  Gotz		0x801c3fa1
+  "Gotz Wife"		0x801c3fa2
+  "Potion man"		0x801c3fa3
+  Kent		0x801c3fa4
+  Stu		0x801c3fa5
+  Midwife		0x801c3fa6
+  May		0x801c3fa7
+  Rick		0x801c3fa8
+  Pastor		0x801c3fa9
+  Shipper		0x801c3faa
+  Saibara		0x801c3fab
+  Barmann		0x801c3fac
+  Fischer		0x801c3fad
+  "Zimmermann 1"		0x801c3fae
+  "Zimmermann 2"		0x801c3faf
+  Meister		0x801c3fb0
+  Waldvieh		0x801c3fb1
+  Oldman		0x801c3fb4
+  Oldwoman		0x801c3fb5
+
+
+  giftConvo.First		0x8016f8b3
+  giftConvo.Second		0x8016f8cc
+  giftConvo.Third		0x8016f8cd
+  giftConvo.Fourth		0x8016f8ce
+  giftConvo.Fifth		0x8016f8cf
+  giftConvo.Sixth		0x8016f8d0
+  giftConvo.Seventh		0x8016f8d1
+  giftConvo.Eighth		0x8016f8d2
+  giftConvo.Nineth		0x8016f8d3
+  giftConvo.Tenth		0x8016f8d6
+  giftConvo.Eleventh		0x8016f8d7

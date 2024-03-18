@@ -1,41 +1,41 @@
 const socket = io();
 
 const peopleData = {
-  Maria: { isCheckedGift: false, isCheckedConvo: false },
-  Popuri: { isCheckedGift: false, isCheckedConvo: false },
-  Elli: { isCheckedGift: false, isCheckedConvo: false },
-  Ann: { isCheckedGift: false, isCheckedConvo: false },
-  Karen: { isCheckedGift: false, isCheckedConvo: false },
-  "Postbote Harris": { isCheckedGift: false, isCheckedConvo: false },
-  Grey: { isCheckedGift: false, isCheckedConvo: false },
-  Jeff: { isCheckedGift: false, isCheckedConvo: false },
-  Cliff: { isCheckedGift: false, isCheckedConvo: false },
-  Kai: { isCheckedGift: false, isCheckedConvo: false },
-  Mayor: { isCheckedGift: false, isCheckedConvo: false },
-  "Mayor Wife": { isCheckedGift: false, isCheckedConvo: false },
-  Lillia: { isCheckedGift: false, isCheckedConvo: false },
-  Basil: { isCheckedGift: false, isCheckedConvo: false },
-  Ellen: { isCheckedGift: false, isCheckedConvo: false },
-  Doug: { isCheckedGift: false, isCheckedConvo: false },
-  Gotz: { isCheckedGift: false, isCheckedConvo: false },
-  "Gotz Wife": { isCheckedGift: false, isCheckedConvo: false },
-  "Potion man": { isCheckedGift: false, isCheckedConvo: false },
-  Kent: { isCheckedGift: false, isCheckedConvo: false },
-  Stu: { isCheckedGift: false, isCheckedConvo: false },
-  Midwife: { isCheckedGift: false, isCheckedConvo: false },
-  May: { isCheckedGift: false, isCheckedConvo: false },
-  Rick: { isCheckedGift: false, isCheckedConvo: false },
-  Pastor: { isCheckedGift: false, isCheckedConvo: false },
-  Shipper: { isCheckedGift: false, isCheckedConvo: false },
-  Saibara: { isCheckedGift: false, isCheckedConvo: false },
-  Barmann: { isCheckedGift: false, isCheckedConvo: false },
-  Fischer: { isCheckedGift: false, isCheckedConvo: false },
-  "Zimmermann 1": { isCheckedGift: false, isCheckedConvo: false },
-  "Zimmermann 2": { isCheckedGift: false, isCheckedConvo: false },
-  Meister: { isCheckedGift: false, isCheckedConvo: false },
-  Waldvieh: { isCheckedGift: false, isCheckedConvo: false },
-  Oldman: { isCheckedGift: false, isCheckedConvo: false },
-  Oldwoman: { isCheckedGift: false, isCheckedConvo: false },
+  maria: { isCheckedGift: false, isCheckedConvo: false },
+  popuri: { isCheckedGift: false, isCheckedConvo: false },
+  elli: { isCheckedGift: false, isCheckedConvo: false },
+  ann: { isCheckedGift: false, isCheckedConvo: false },
+  karen: { isCheckedGift: false, isCheckedConvo: false },
+  harris: { isCheckedGift: false, isCheckedConvo: false },
+  grey: { isCheckedGift: false, isCheckedConvo: false },
+  jeff: { isCheckedGift: false, isCheckedConvo: false },
+  cliff: { isCheckedGift: false, isCheckedConvo: false },
+  kai: { isCheckedGift: false, isCheckedConvo: false },
+  mayor: { isCheckedGift: false, isCheckedConvo: false },
+  mayor_Wife: { isCheckedGift: false, isCheckedConvo: false },
+  lillia: { isCheckedGift: false, isCheckedConvo: false },
+  basil: { isCheckedGift: false, isCheckedConvo: false },
+  ellen: { isCheckedGift: false, isCheckedConvo: false },
+  doug: { isCheckedGift: false, isCheckedConvo: false },
+  gotz: { isCheckedGift: false, isCheckedConvo: false },
+  gotz_Wife: { isCheckedGift: false, isCheckedConvo: false },
+  potion_man: { isCheckedGift: false, isCheckedConvo: false },
+  kent: { isCheckedGift: false, isCheckedConvo: false },
+  stu: { isCheckedGift: false, isCheckedConvo: false },
+  midwife: { isCheckedGift: false, isCheckedConvo: false },
+  may: { isCheckedGift: false, isCheckedConvo: false },
+  rick: { isCheckedGift: false, isCheckedConvo: false },
+  pastor: { isCheckedGift: false, isCheckedConvo: false },
+  shipper: { isCheckedGift: false, isCheckedConvo: false },
+  saibara: { isCheckedGift: false, isCheckedConvo: false },
+  barmann: { isCheckedGift: false, isCheckedConvo: false },
+  fischer: { isCheckedGift: false, isCheckedConvo: false },
+  zimmermann1: { isCheckedGift: false, isCheckedConvo: false },
+  zimmermann2: { isCheckedGift: false, isCheckedConvo: false },
+  meister: { isCheckedGift: false, isCheckedConvo: false },
+  waldvieh: { isCheckedGift: false, isCheckedConvo: false },
+  oldman: { isCheckedGift: false, isCheckedConvo: false },
+  oldwoman: { isCheckedGift: false, isCheckedConvo: false },
 };
 
 /**
@@ -45,6 +45,7 @@ const peopleData = {
       <div id="json-output-people"></div>
  */
 socket.on("json-update", (jsonData) => {
+  console.log(jsonData);
   const formattedStats = formatStats(jsonData);
   const formattedAnimals = formatAnimals(jsonData);
   const formattedPeople = formatPeople(jsonData);
@@ -76,12 +77,12 @@ function formatPeople(jsonData) {
 }
 
 function formatTime(time) {
-  return `${time.hour}:${time.minute}`;
+  return `${time.hour}:${time.minutes}`;
 }
 
 function formatAnalogTime(time) {
   const hours = time.hour;
-  const minutes = time.minute;
+  const minutes = time.minutes;
   const canvas = document.getElementById("analogClock");
   const context = canvas.getContext("2d");
   const radius = canvas.width / 2;
@@ -128,13 +129,13 @@ function formatSection(section, title) {
 function formatStatsSectionWithBars(section1, title) {
   const keys = Object.keys(section1);
   let formattedSection = `<strong>${title}:</strong><ul class="stats-list">`;
-  keys.splice(keys.indexOf("money1"), 1);
-  keys.splice(keys.indexOf("money3"), 1);
+  keys.splice(keys.indexOf("money"), 1);
+  // keys.splice(keys.indexOf("money3"), 1);
   console.log(keys);
   keys.forEach((key, index) => {
     const value = section1[key];
     let progressBar = createProgressBar(value);
-    if (String(key).includes("money2")) {
+    if (String(key).includes("money")) {
       progressBar = `<div class="money" > ${value} </div>`;
       key = "money";
     }
@@ -165,8 +166,8 @@ function formatSectionWithBars(section1, section2, title) {
               [0x04, false],
             ])
           );
-        peopleData["Maria"].isCheckedConvo = inputValues.get(0x02);
-        peopleData["Maria"].isCheckedGift = inputValues.get(0x04);
+        peopleData["maria"].isCheckedConvo = inputValues.get(0x02);
+        peopleData["maria"].isCheckedGift = inputValues.get(0x04);
 
         break;
       case "Second":
@@ -182,12 +183,12 @@ function formatSectionWithBars(section1, section2, title) {
               [0x20, false],
             ])
           );
-        peopleData["Zimmermann 1"].isCheckedConvo = inputValues2.get(0x01);
-        peopleData["Meister"].isCheckedConvo = inputValues2.get(0x02);
-        peopleData["Waldvieh"].isCheckedConvo = inputValues2.get(0x04);
-        peopleData["Oldwoman"].isCheckedConvo = inputValues2.get(0x08);
-        peopleData["Oldman"].isCheckedConvo = inputValues2.get(0x10);
-        peopleData["Fischer"].isCheckedConvo = inputValues2.get(0x20);
+        peopleData["zimmermann1"].isCheckedConvo = inputValues2.get(0x01);
+        peopleData["meister"].isCheckedConvo = inputValues2.get(0x02);
+        peopleData["waldvieh"].isCheckedConvo = inputValues2.get(0x04);
+        peopleData["oldwoman"].isCheckedConvo = inputValues2.get(0x08);
+        peopleData["oldman"].isCheckedConvo = inputValues2.get(0x10);
+        peopleData["fischer"].isCheckedConvo = inputValues2.get(0x20);
         break;
 
       case "Third":
@@ -205,14 +206,14 @@ function formatSectionWithBars(section1, section2, title) {
               [0x80, false],
             ])
           );
-        peopleData["Rick"].isCheckedConvo = inputValues3.get(0x01);
-        peopleData["Saibara"].isCheckedConvo = inputValues3.get(0x02);
-        peopleData["Potion man"].isCheckedConvo = inputValues3.get(0x04);
-        peopleData["Kent"].isCheckedConvo = inputValues3.get(0x08);
-        peopleData["Stu"].isCheckedConvo = inputValues3.get(0x10);
-        peopleData["Midwife"].isCheckedConvo = inputValues3.get(0x20);
-        peopleData["May"].isCheckedConvo = inputValues3.get(0x40);
-        peopleData["Zimmermann 2"].isCheckedConvo = inputValues3.get(0x80);
+        peopleData["rick"].isCheckedConvo = inputValues3.get(0x01);
+        peopleData["saibara"].isCheckedConvo = inputValues3.get(0x02);
+        peopleData["potion_man"].isCheckedConvo = inputValues3.get(0x04);
+        peopleData["kent"].isCheckedConvo = inputValues3.get(0x08);
+        peopleData["stu"].isCheckedConvo = inputValues3.get(0x10);
+        peopleData["midwife"].isCheckedConvo = inputValues3.get(0x20);
+        peopleData["may"].isCheckedConvo = inputValues3.get(0x40);
+        peopleData["zimmermann2"].isCheckedConvo = inputValues3.get(0x80);
         break;
 
       case "Fourth":
@@ -230,14 +231,14 @@ function formatSectionWithBars(section1, section2, title) {
               [0x80, false],
             ])
           );
-        peopleData["Cliff"].isCheckedConvo = inputValues4.get(0x01);
-        peopleData["Popuri"].isCheckedConvo = inputValues4.get(0x02);
-        peopleData["Mayor"].isCheckedConvo = inputValues4.get(0x04);
-        peopleData["Mayor Wife"].isCheckedConvo = inputValues4.get(0x08);
-        peopleData["Lillia"].isCheckedConvo = inputValues4.get(0x10);
-        peopleData["Basil"].isCheckedConvo = inputValues4.get(0x20);
-        peopleData["Ellen"].isCheckedConvo = inputValues4.get(0x40);
-        peopleData["Pastor"].isCheckedConvo = inputValues4.get(0x80);
+        peopleData["cliff"].isCheckedConvo = inputValues4.get(0x01);
+        peopleData["popuri"].isCheckedConvo = inputValues4.get(0x02);
+        peopleData["mayor"].isCheckedConvo = inputValues4.get(0x04);
+        peopleData["mayor_Wife"].isCheckedConvo = inputValues4.get(0x08);
+        peopleData["lillia"].isCheckedConvo = inputValues4.get(0x10);
+        peopleData["basil"].isCheckedConvo = inputValues4.get(0x20);
+        peopleData["ellen"].isCheckedConvo = inputValues4.get(0x40);
+        peopleData["pastor"].isCheckedConvo = inputValues4.get(0x80);
         break;
 
       case "Fifth":
@@ -254,13 +255,13 @@ function formatSectionWithBars(section1, section2, title) {
               [0x80, false],
             ])
           );
-        peopleData["Popuri"].isCheckedConvo = inputValues5.get(0x02);
-        peopleData["Elli"].isCheckedConvo = inputValues5.get(0x04);
-        peopleData["Ann"].isCheckedConvo = inputValues5.get(0x08);
-        peopleData["Karen"].isCheckedConvo = inputValues5.get(0x10);
-        peopleData["Postbote Harris"].isCheckedConvo = inputValues5.get(0x20);
-        peopleData["Grey"].isCheckedConvo = inputValues5.get(0x40);
-        peopleData["Jeff"].isCheckedConvo = inputValues5.get(0x80);
+        peopleData["popuri"].isCheckedConvo = inputValues5.get(0x02);
+        peopleData["elli"].isCheckedConvo = inputValues5.get(0x04);
+        peopleData["ann"].isCheckedConvo = inputValues5.get(0x08);
+        peopleData["karen"].isCheckedConvo = inputValues5.get(0x10);
+        peopleData["harris"].isCheckedConvo = inputValues5.get(0x20);
+        peopleData["grey"].isCheckedConvo = inputValues5.get(0x40);
+        peopleData["jeff"].isCheckedConvo = inputValues5.get(0x80);
         break;
 
       case "Sixth":
@@ -277,13 +278,13 @@ function formatSectionWithBars(section1, section2, title) {
               [0x80, false],
             ])
           );
-        peopleData["Kent"].isCheckedGift = inputValues6.get(0x01);
-        peopleData["Stu"].isCheckedGift = inputValues6.get(0x02);
-        peopleData["Midwife"].isCheckedGift = inputValues6.get(0x04);
-        peopleData["May"].isCheckedGift = inputValues6.get(0x08);
-        peopleData["Zimmermann 1"].isCheckedGift = inputValues6.get(0x10);
-        peopleData["Zimmermann 2"].isCheckedGift = inputValues6.get(0x20);
-        peopleData["Waldvieh"].isCheckedGift = inputValues6.get(0x80);
+        peopleData["kent"].isCheckedGift = inputValues6.get(0x01);
+        peopleData["stu"].isCheckedGift = inputValues6.get(0x02);
+        peopleData["midwife"].isCheckedGift = inputValues6.get(0x04);
+        peopleData["may"].isCheckedGift = inputValues6.get(0x08);
+        peopleData["zimmermann1"].isCheckedGift = inputValues6.get(0x10);
+        peopleData["zimmermann2"].isCheckedGift = inputValues6.get(0x20);
+        peopleData["waldvieh"].isCheckedGift = inputValues6.get(0x80);
         break;
 
       case "Seventh":
@@ -300,13 +301,13 @@ function formatSectionWithBars(section1, section2, title) {
               [0x40, false],
             ])
           );
-        peopleData["Mayor Wife"].isCheckedGift = inputValues7.get(0x01);
-        peopleData["Lillia"].isCheckedGift = inputValues7.get(0x02);
-        peopleData["Basil"].isCheckedGift = inputValues7.get(0x04);
-        peopleData["Ellen"].isCheckedGift = inputValues7.get(0x08);
-        peopleData["Pastor"].isCheckedGift = inputValues7.get(0x10);
-        peopleData["Rick"].isCheckedGift = inputValues7.get(0x20);
-        peopleData["Saibara"].isCheckedGift = inputValues7.get(0x40);
+        peopleData["mayor_Wife"].isCheckedGift = inputValues7.get(0x01);
+        peopleData["lillia"].isCheckedGift = inputValues7.get(0x02);
+        peopleData["basil"].isCheckedGift = inputValues7.get(0x04);
+        peopleData["ellen"].isCheckedGift = inputValues7.get(0x08);
+        peopleData["pastor"].isCheckedGift = inputValues7.get(0x10);
+        peopleData["rick"].isCheckedGift = inputValues7.get(0x20);
+        peopleData["saibara"].isCheckedGift = inputValues7.get(0x40);
         break;
 
       case "Eighth":
@@ -324,14 +325,14 @@ function formatSectionWithBars(section1, section2, title) {
               [0x80, false],
             ])
           );
-        peopleData["Ann"].isCheckedGift = inputValues8.get(0x01);
-        peopleData["Karen"].isCheckedGift = inputValues8.get(0x02);
-        peopleData["Postbote Harris"].isCheckedGift = inputValues8.get(0x04);
-        peopleData["Grey"].isCheckedGift = inputValues8.get(0x08);
-        peopleData["Jeff"].isCheckedGift = inputValues8.get(0x10);
-        peopleData["Cliff"].isCheckedGift = inputValues8.get(0x20);
-        peopleData["Kai"].isCheckedGift = inputValues8.get(0x40);
-        peopleData["Mayor"].isCheckedGift = inputValues8.get(0x80);
+        peopleData["ann"].isCheckedGift = inputValues8.get(0x01);
+        peopleData["karen"].isCheckedGift = inputValues8.get(0x02);
+        peopleData["harris"].isCheckedGift = inputValues8.get(0x04);
+        peopleData["grey"].isCheckedGift = inputValues8.get(0x08);
+        peopleData["jeff"].isCheckedGift = inputValues8.get(0x10);
+        peopleData["cliff"].isCheckedGift = inputValues8.get(0x20);
+        peopleData["kai"].isCheckedGift = inputValues8.get(0x40);
+        peopleData["mayor"].isCheckedGift = inputValues8.get(0x80);
         break;
 
       case "Nineth":
@@ -348,13 +349,13 @@ function formatSectionWithBars(section1, section2, title) {
               [0x80, false],
             ])
           );
-        peopleData["Doug"].isCheckedConvo = inputValues9.get(0x01);
-        peopleData["Gotz"].isCheckedConvo = inputValues9.get(0x02);
-        peopleData["Gotz Wife"].isCheckedConvo = inputValues9.get(0x04);
-        peopleData["Shipper"].isCheckedConvo = inputValues9.get(0x08);
-        peopleData["Barmann"].isCheckedConvo = inputValues9.get(0x10);
-        peopleData["Popuri"].isCheckedGift = inputValues9.get(0x40);
-        peopleData["Elli"].isCheckedGift = inputValues9.get(0x80);
+        peopleData["doug"].isCheckedConvo = inputValues9.get(0x01);
+        peopleData["gotz"].isCheckedConvo = inputValues9.get(0x02);
+        peopleData["gotz_Wife"].isCheckedConvo = inputValues9.get(0x04);
+        peopleData["shipper"].isCheckedConvo = inputValues9.get(0x08);
+        peopleData["barmann"].isCheckedConvo = inputValues9.get(0x10);
+        peopleData["popuri"].isCheckedGift = inputValues9.get(0x40);
+        peopleData["elli"].isCheckedGift = inputValues9.get(0x80);
         break;
 
       case "Tenth":
@@ -366,8 +367,8 @@ function formatSectionWithBars(section1, section2, title) {
               [0x02, false],
             ])
           );
-        peopleData["Shipper"].isCheckedGift = inputValues10.get(0x01);
-        peopleData["Barmann"].isCheckedGift = inputValues10.get(0x02);
+        peopleData["shipper"].isCheckedGift = inputValues10.get(0x01);
+        peopleData["barmann"].isCheckedGift = inputValues10.get(0x02);
         break;
 
       case "Nineth":
@@ -383,12 +384,12 @@ function formatSectionWithBars(section1, section2, title) {
               [0x80, false],
             ])
           );
-        peopleData["Oldwoman"].isCheckedGift = inputValues11.get(0x01);
-        peopleData["Oldman"].isCheckedGift = inputValues11.get(0x02);
-        peopleData["Fischer"].isCheckedGift = inputValues11.get(0x04);
-        peopleData["Doug"].isCheckedGift = inputValues11.get(0x20);
-        peopleData["Gotz"].isCheckedGift = inputValues11.get(0x40);
-        peopleData["Gotz Wife"].isCheckedGift = inputValues11.get(0x80);
+        peopleData["oldwoman"].isCheckedGift = inputValues11.get(0x01);
+        peopleData["oldman"].isCheckedGift = inputValues11.get(0x02);
+        peopleData["fischer"].isCheckedGift = inputValues11.get(0x04);
+        peopleData["doug"].isCheckedGift = inputValues11.get(0x20);
+        peopleData["gotz"].isCheckedGift = inputValues11.get(0x40);
+        peopleData["gotz_Wife"].isCheckedGift = inputValues11.get(0x80);
         break;
 
       default:
