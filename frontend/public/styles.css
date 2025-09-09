@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Funhouse";
-  src: url("./fonts/Funhouse.ttf") format("truetype");
+  src: url("assets/fonts/Funhouse.ttf") format("truetype");
 }
 body {
   background-size: 150px 150px; /* Größe der Kästchen */

@@ -418,7 +418,7 @@ function formatSectionWithBars(section1, section2, title) {
       formattedSection += '</ul><ul class="people-list">';
     }
     // console.log(key);
-    formattedSection += `<li class="people"><img src="./img/pic/${key}.png" />${key}: ${progressBar} Gift ${createCheckBox(
+    formattedSection += `<li class="people"><img src="./assets/images/portraits/${key}.png" />${key}: ${progressBar} Gift ${createCheckBox(
       `giftCheckbox_${key}`,
       peopleData[key].isCheckedGift
     )} Convo ${createCheckBox(
