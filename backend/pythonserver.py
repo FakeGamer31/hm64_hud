@@ -1,9 +1,14 @@
-from flask import Flask, send_file
+from flask import Flask, send_from_directory
 from flask_socketio import SocketIO
 import time
+import os
 from threading import Thread
 
-app = Flask(__name__, static_url_path='', static_folder='.')
+app = Flask(
+    __name__,
+    static_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend', 'public')),
+    static_url_path=''
+)
 socketio = SocketIO(app)
 
 # Hier importieren Sie Ihre Python-Klasse, die die Daten bereitstellt
@@ -13,7 +18,7 @@ data_provider = HM64Mem()  # Annahme: Ihre Datenklasse
 
 @app.route("/")
 def index():
-    return send_file("index.html")
+    return send_from_directory(app.static_folder, "index.html")
 
 def emit_updated_data():
     json_data = data_provider.get_data() 
