@@ -38,6 +38,28 @@ const peopleData = {
   oldwoman: { isCheckedGift: false, isCheckedConvo: false },
 };
 
+const peopleKeys = Object.getOwnPropertyNames(peopleData);
+console.log(peopleKeys);
+
+function renderPeopleList() {
+  let html = `<strong>People:</strong><ul class="people-list">`;
+  peopleKeys.forEach((key, index) => {
+    if (index % 6 === 0 && index !== 0) {
+      html += '</ul><ul class="people-list">';
+    }
+    html += `<li class="people" id="person-${key}">
+      <img src="./assets/images/portraits/${key}.png" />
+      <span class="person-name">${key}:</span>
+      <span class="person-bar" id="bar-${key}"></span>
+      Gift <span class="person-gift" id="giftCheckbox_${key}"></span>
+      Convo <span class="person-convo" id="convoCheckbox_${key}"></span>
+    </li>`;
+  });
+  html += "</ul>";
+  document.getElementById("json-output-people").innerHTML = html;
+}
+renderPeopleList();
+
 /**
  * 
       <div id="json-output-stats"></div>
@@ -45,13 +67,15 @@ const peopleData = {
       <div id="json-output-people"></div>
  */
 socket.on("json-update", (jsonData) => {
-  // console.log(jsonData);
+  // Update stats and animals as before
+
   const formattedStats = formatStats(jsonData);
   const formattedAnimals = formatAnimals(jsonData);
-  const formattedPeople = formatPeople(jsonData);
   document.getElementById("json-output-stats").innerHTML = formattedStats;
   document.getElementById("json-output-animals").innerHTML = formattedAnimals;
-  document.getElementById("json-output-people").innerHTML = formattedPeople;
+
+  // Update only the dynamic parts of people section
+  updatePeopleSection(jsonData.people, jsonData.giftConvo);
 });
 
 function formatStats(jsonData) {
@@ -71,92 +95,9 @@ function formatAnimals(jsonData) {
   return `<p>${formattedAnimals}</p>`;
 }
 
-function formatPeople(jsonData) {
-  const formattedPeople = formatSectionWithBars(
-    jsonData.people,
-    jsonData.giftConvo,
-    "People"
-  );
-  return `<p>${formattedPeople}</p>`;
-}
-
-function formatTime(time) {
-  return `${time.hour}:${time.minutes}`;
-}
-
-function formatAnalogTime(time) {
-  const hours = time.hour;
-  const minutes = time.minutes;
-  const canvas = document.getElementById("analogClock");
-  const context = canvas.getContext("2d");
-  const radius = canvas.width / 2;
-
-  context.clearRect(0, 0, canvas.width, canvas.height);
-
-  // Draw clock face
-  context.beginPath();
-  context.arc(radius, radius, radius - 5, 0, 2 * Math.PI);
-  context.fillStyle = "#fff";
-  context.fill();
-  context.strokeStyle = "#333";
-  context.lineWidth = 5;
-  context.stroke();
-  // Draw hour hand
-  const hourAngle = ((hours % 12) * 30 + (minutes / 60) * 30) * (Math.PI / 180);
-  drawHand(context, radius * 0.5, hourAngle, 8, "#333");
-
-  // Draw minute hand
-  const minuteAngle = minutes * 6 * (Math.PI / 180);
-  drawHand(context, radius * 0.7, minuteAngle, 4, "#333");
-
-  for (let i = 1; i <= 12; i++) {
-    const angle = i * 30 * (Math.PI / 180);
-    const x = radius + radius * 0.8 * Math.sin(angle);
-    const y = radius - radius * 0.8 * Math.cos(angle);
-
-    context.fillStyle = "#333";
-    context.font = "bold 16px Arial";
-    context.textAlign = "center";
-    context.textBaseline = "middle";
-    context.fillText(i.toString(), x, y);
-  }
-}
-
-function formatSection(section, title) {
-  const keys = Object.keys(section);
-  const formattedSection = keys
-    .map((key) => `<li class="${title}">${key}: ${section[key]}</li>`)
-    .join("");
-  return `<strong>${title}:</strong><ul>${formattedSection}</ul>`;
-}
-
-function formatStatsSectionWithBars(section1, title) {
-  const keys = Object.keys(section1);
-  let formattedSection = `<strong>${title}:</strong><ul class="stats-list">`;
-  // keys.splice(keys.indexOf("money"), 1);
-  // keys.splice(keys.indexOf("money3"), 1);
-  console.log(keys);
-  keys.forEach((key, index) => {
-    const value = section1[key];
-    let progressBar = createProgressBar(value);
-    if (String(key).includes("money")) {
-      progressBar = `<div class="money" > ${value} </div>`;
-      key = "money";
-    }
-
-    if (index % 4 === 0 && index !== 0) {
-      formattedSection += '</ul><ul class="stats-list">';
-    }
-    formattedSection += `<li class="stats">${key}: ${progressBar}</li>`;
-  });
-
-  formattedSection += "</ul>";
-  return formattedSection;
-}
-
-function formatSectionWithBars(section1, section2, title) {
-  for (const group in section2) {
-    const value = section2[group];
+function updatePeopleSection(people, giftConvo) {
+  for (const group in giftConvo) {
+    const value = giftConvo[group];
 
     // Hier setzt du die Checkboxen basierend auf den Werten
     // Anmerkung: Du musst die genauen Bedingungen anpassen
@@ -407,24 +348,97 @@ function formatSectionWithBars(section1, section2, title) {
     // Weitere Bedingungen für andere Werte ...
   }
 
-  const keys = Object.keys(section1);
-  let formattedSection = `<strong>${title}:</strong><ul class="people-list">`;
+  // (You can copy your switch/case logic for giftConvo here, as in your original code.)
 
+  // Update progress bars and checkboxes for each person
+  peopleKeys.forEach((key) => {
+    // Update progress bar
+    const barElem = document.getElementById(`bar-${key}`);
+    if (barElem) {
+      barElem.innerHTML = createProgressBar(people[key] || 0);
+    }
+    // Update checkboxes
+    const giftElem = document.getElementById(`giftCheckbox_${key}`);
+    const convoElem = document.getElementById(`convoCheckbox_${key}`);
+    if (giftElem) {
+      const checked = peopleData[key] && peopleData[key].isCheckedGift;
+      giftElem.innerHTML = createCheckBox(`giftCheckbox_${key}`, checked);
+    }
+    if (convoElem) {
+      const checked = peopleData[key] && peopleData[key].isCheckedConvo;
+      convoElem.innerHTML = createCheckBox(`convoCheckbox_${key}`, checked);
+    }
+  });
+}
+
+function formatTime(time) {
+  return `${time.hour}:${time.minutes}`;
+}
+
+function formatAnalogTime(time) {
+  const hours = time.hour;
+  const minutes = time.minutes;
+  const canvas = document.getElementById("analogClock");
+  const context = canvas.getContext("2d");
+  const radius = canvas.width / 2;
+
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw clock face
+  context.beginPath();
+  context.arc(radius, radius, radius - 5, 0, 2 * Math.PI);
+  context.fillStyle = "#fff";
+  context.fill();
+  context.strokeStyle = "#333";
+  context.lineWidth = 5;
+  context.stroke();
+  // Draw hour hand
+  const hourAngle = ((hours % 12) * 30 + (minutes / 60) * 30) * (Math.PI / 180);
+  drawHand(context, radius * 0.5, hourAngle, 8, "#333");
+
+  // Draw minute hand
+  const minuteAngle = minutes * 6 * (Math.PI / 180);
+  drawHand(context, radius * 0.7, minuteAngle, 4, "#333");
+
+  for (let i = 1; i <= 12; i++) {
+    const angle = i * 30 * (Math.PI / 180);
+    const x = radius + radius * 0.8 * Math.sin(angle);
+    const y = radius - radius * 0.8 * Math.cos(angle);
+
+    context.fillStyle = "#333";
+    context.font = "bold 16px Arial";
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillText(i.toString(), x, y);
+  }
+}
+
+function formatSection(section, title) {
+  const keys = Object.keys(section);
+  const formattedSection = keys
+    .map((key) => `<li class="${title}">${key}: ${section[key]}</li>`)
+    .join("");
+  return `<strong>${title}:</strong><ul>${formattedSection}</ul>`;
+}
+
+function formatStatsSectionWithBars(section1, title) {
+  const keys = Object.keys(section1);
+  let formattedSection = `<strong>${title}:</strong><ul class="stats-list">`;
+  // keys.splice(keys.indexOf("money"), 1);
+  // keys.splice(keys.indexOf("money3"), 1);
+  // console.log(keys);
   keys.forEach((key, index) => {
     const value = section1[key];
-    const progressBar = createProgressBar(value);
-
-    if (index % 6 === 0 && index !== 0) {
-      formattedSection += '</ul><ul class="people-list">';
+    let progressBar = createProgressBar(value);
+    if (String(key).includes("money")) {
+      progressBar = `<div class="money" > ${value} </div>`;
+      key = "money";
     }
-    // console.log(key);
-    formattedSection += `<li class="people"><img src="./assets/images/portraits/${key}.png" />${key}: ${progressBar} Gift ${createCheckBox(
-      `giftCheckbox_${key}`,
-      peopleData[key].isCheckedGift
-    )} Convo ${createCheckBox(
-      `convoCheckbox_${key} lol `,
-      peopleData[key].isCheckedConvo
-    )}</li>`;
+
+    if (index % 4 === 0 && index !== 0) {
+      formattedSection += '</ul><ul class="stats-list">';
+    }
+    formattedSection += `<li class="stats">${key}: ${progressBar}</li>`;
   });
 
   formattedSection += "</ul>";
