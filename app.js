@@ -45,7 +45,7 @@ const peopleData = {
       <div id="json-output-people"></div>
  */
 socket.on("json-update", (jsonData) => {
-  console.log(jsonData);
+  // console.log(jsonData);
   const formattedStats = formatStats(jsonData);
   const formattedAnimals = formatAnimals(jsonData);
   const formattedPeople = formatPeople(jsonData);
@@ -63,7 +63,11 @@ function formatStats(jsonData) {
 }
 
 function formatAnimals(jsonData) {
-  const formattedAnimals = formatSection(jsonData.animals, "Animals");
+  // const formattedAnimals = formatSection(jsonData.animals, "Animals");
+  const formattedAnimals = formatStatsSectionWithBars(
+    jsonData.animals,
+    "Animals"
+  );
   return `<p>${formattedAnimals}</p>`;
 }
 
@@ -129,7 +133,7 @@ function formatSection(section, title) {
 function formatStatsSectionWithBars(section1, title) {
   const keys = Object.keys(section1);
   let formattedSection = `<strong>${title}:</strong><ul class="stats-list">`;
-  keys.splice(keys.indexOf("money"), 1);
+  // keys.splice(keys.indexOf("money"), 1);
   // keys.splice(keys.indexOf("money3"), 1);
   console.log(keys);
   keys.forEach((key, index) => {
@@ -413,7 +417,7 @@ function formatSectionWithBars(section1, section2, title) {
     if (index % 6 === 0 && index !== 0) {
       formattedSection += '</ul><ul class="people-list">';
     }
-    console.log(key);
+    // console.log(key);
     formattedSection += `<li class="people"><img src="./img/pic/${key}.png" />${key}: ${progressBar} Gift ${createCheckBox(
       `giftCheckbox_${key}`,
       peopleData[key].isCheckedGift
