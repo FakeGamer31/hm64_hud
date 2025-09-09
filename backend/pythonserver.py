@@ -27,7 +27,7 @@ def emit_updated_data():
 def background_thread():
     while True:
         emit_updated_data()
-        time.sleep(0.001)  # Send data every 5 seconds
+        time.sleep(0.1)
 
 @socketio.on('connect')
 def handle_connect():
